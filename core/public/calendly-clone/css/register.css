@@ -1,0 +1,52 @@
+.container {
+  max-width: 900px;
+  overflow: auto;
+}
+
+.description-section {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.body-section {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+input {
+  width: 400px;
+}
+
+button[type="submit"] {
+  height: 45px;
+  margin-top: 15px;
+  padding: 0 20px;
+}
+
+button[type="submit"]:focus {
+  outline: 0;
+  opacity: 0.5;
+}
+
+@media (max-width: 1250px) {
+  input {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+  }
+  .body-section {
+    margin: 30px 100px;
+  }
+  form {
+    text-align: initial;
+  }
+}
+
+@media (max-width: 645px) {
+  .body-section {
+    margin: 30px 5%;
+  }
+}
+/*# sourceMappingURL=register.css.map */
