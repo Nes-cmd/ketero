@@ -17,6 +17,10 @@ class CreateEvent extends Component
     public $group = false;
     public $avchoosen;
 
+    public $activeTab = 'tab-1';
+
+    protected $listeners = ['availabilityCreated'];
+
     public function mount()
     {
         $availabilities = Availabilty::with('timerange')->where('user_id', 1)->get();
@@ -24,6 +28,10 @@ class CreateEvent extends Component
         $this->dayOrders = AvailabilityManager::getDaycodes();
         $this->selectedAv = $this->availabilities[0];
         $this->avchoosen = $this->selectedAv['id'];
+        
+    }
+    public function loadEditor($day){
+        $this->dispatch('loadAvEditor', ['timeranges' => $this->selectedAv['timeranges'][$day], 'day' => $day]);
     }
     public function updatedAvchoosen()
     {
@@ -32,6 +40,25 @@ class CreateEvent extends Component
             if ($av['id'] == $this->avchoosen) $this->selectedAv = $av;
         }
     }
+    public function availabilityCreated($data){
+       
+        $this->availabilities = $data['availability'];
+        
+        $this->dispatch('close-modal');
+    }
+    public function next($to){
+        if($to == 'tab-2'){
+            $this->validate([
+                'event.name' => 'required',
+                'event.location' => 'required',
+                'event.link' => 'required',
+                'event.color' => 'required',
+            ]);
+        }
+        
+        $this->activeTab = $to;
+        
+    }
     public function createEvent()
     {
         $this->validate([
@@ -39,8 +66,6 @@ class CreateEvent extends Component
             'event.location' => 'required',
             'event.link' => 'required',
             'event.color' => 'required',
-            // 'event.maxinvities' => 'nullable',
-
         ]);
         $event = EventType::create([
             'name' => $this->event['name'],

@@ -10,19 +10,19 @@
 
                 <ul class="nav nav-pills custom-nav nav-justified" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link done" id="steparrow-gen-info-tab" data-bs-toggle="pill" data-bs-target="#steparrow-gen-info" type="button" role="tab" aria-controls="steparrow-gen-info" aria-selected="true">General</button>
+                        <button class="nav-link done {{$activeTab == 'tab-1'?'active':''}}" wire:click="next('tab-1')">General</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="steparrow-description-info-tab" data-bs-toggle="pill" data-bs-target="#steparrow-description-info" type="button" role="tab" aria-controls="steparrow-description-info" aria-selected="false">Availability</button>
+                        <button class="nav-link {{$activeTab == 'tab-3'?'done':''}} {{$activeTab == 'tab-2'?'active':''}}" wire:click="next('tab-2')">Availability</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-experience-tab" data-bs-toggle="pill" data-bs-target="#pills-experience" type="button" role="tab" aria-controls="pills-experience" aria-selected="false">Finish</button>
+                        <button class="nav-link {{$activeTab == 'tab-3'?'done active':''}}" id="pills-experience-tab" wire:click="next('tab-3')">Finish</button>
                     </li>
                 </ul>
             </div>
 
             <div class="tab-content">
-                <div class="tab-pane fade" id="steparrow-gen-info" role="tabpanel" aria-labelledby="steparrow-gen-info-tab">
+                <div class="tab-pane fade {{$activeTab == 'tab-1'?'show active':''}}" id="steparrow-gen-info" role="tabpanel" aria-labelledby="steparrow-gen-info-tab">
                     <div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -73,7 +73,7 @@
                                     <label class="form-check-label" for="customSwitchsizemd">Morethan 1 person at atime?</label>
                                 </div>
                             </div>
-                           
+
                             <div class="col-lg-6" style="display: {{$group?'block':'none'}};">
                                 <div class="mb-3">
                                     <label class="form-label" for="steparrow-gen-info-email-input">Maximum participants</label>
@@ -81,16 +81,16 @@
                                     @error('event.maxinvities')<span class="text-danger px-2">{{ $message }}</span>@enderror
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                     <div class="d-flex align-items-start gap-3 mt-4">
-                        <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab" data-nexttab="steparrow-description-info-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to more info</button>
+                        <button wire:click="next('tab-2')" type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Go to more info</button>
                     </div>
                 </div>
                 <!-- end tab pane -->
 
-                <div class="tab-pane fade show active" id="steparrow-description-info" role="tabpanel" aria-labelledby="steparrow-description-info-tab">
+                <div class="tab-pane fade {{$activeTab == 'tab-2'?'show active':''}}" id="steparrow-description-info" role="tabpanel" aria-labelledby="steparrow-description-info-tab">
                     <div>
                         <div class="row">
                             <div class="mb-3 col-6">
@@ -101,7 +101,7 @@
                                         <option value="{{ $availability['id'] }}">{{ ucfirst($availability['name']) }}</option>
                                         @endforeach
                                     </select>
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAvailability">Create new</button>
+                                    <button class="btn btn-primary" x-data x-on:click="$dispatch('open-modal', {'name': 'new-availability'})">Create new</button>
                                 </div>
 
                             </div>
@@ -142,7 +142,7 @@
                                         else $status = 'partial';
                                         }
                                         @endphp
-                                        <td width="14%" style="position:relative;background-color: rgb(240,240, 240);" data-bs-toggle="modal" data-bs-target="#{{$selectedAv['name'] == 'default'?'':'showModal'}}">
+                                        <td width="14%" wire:click="loadEditor('{{$day}}')" style="position:relative;background-color: rgb(240,240, 240);" data-bs-toggle="modal" data-bs-target="#{{$selectedAv['name'] == 'default'?'':'showModal'}}">
                                             <div style="padding-left:4px;">
                                                 <span class="{{$status}}" style="padding-left:5px;">{{ ucfirst($status) }}</span>
                                                 <div style="display: flex; flex-direction:column;overflow-x:hidden;max-width:130px;padding-right:0">
@@ -160,13 +160,13 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-start gap-3 mt-4">
-                        <button type="button" class="btn btn-light btn-label previestab" data-previous="steparrow-gen-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to General</button>
-                        <button wire:click="createEvent" type="button" class="btn btn-success btn-label right ms-auto nexttab" data-nexttab="pills-experience-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
+                        <button wire:click="next('tab-1')" type="button" class="btn btn-light btn-label previestab" data-previous="steparrow-gen-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to General</button>
+                        <button wire:click="next('tab-3')" type="button" class="btn btn-success btn-label right ms-auto nexttab" data-nexttab="pills-experience-tab"><i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
                     </div>
                 </div>
                 <!-- end tab pane -->
 
-                <div class="tab-pane fade" id="pills-experience" role="tabpanel">
+                <div class="tab-pane fade {{$activeTab == 'tab-3'?'show active':''}}" id="pills-experience" role="tabpanel">
                     <div class="text-center">
 
                         <div class="avatar-md mt-5 mb-4 mx-auto">
@@ -185,4 +185,17 @@
         </form>
     </div>
     <!-- end card body -->
+
+    <x-modal title="Create new availability" name="new-availability" height="300px">
+        <x-slot:body>
+            <livewire-create-availability />
+            </x-slot>
+    </x-modal>
+
+    <x-modal title="Availability for" name="av-editor" height="450px">
+        <x-slot:body>
+            <livewire-availability-editor />
+            </x-slot>
+    </x-modal>
+
 </div>

@@ -21,14 +21,26 @@
     <x-modal name="modal-1" title="Title goes here!">
         <x-slot:body>
             <livewire-test-with-modal />
-        </x-slot>
+            </x-slot>
     </x-modal>
 
-    <x-modal name="modal-2" title="This is modal 2">
+
+
+    <x-modal title="Create new availability" name="modal-2">
         <x-slot:body>
-            <div>
-                <h4>Second modal</h4>
-            </div>
+            <form action="{{ route('create-availability') }}" method="post">
+                @csrf
+                <div>
+                    <div class="">
+                        <label for="avname">Availability name</label>
+                        <input required id="name" name="name" value="{{old('name')}}" type="text" class="form-control">
+                        @error('avname')<span class="text-danger">{{ $message }}</span><br>@enderror
+                        <span>
+                            A new availability schedule with name name you entered here and default working hour will be created. Then you can edit by clicking each day.
+                        </span>
+                    </div>
+                </div>
+            </form>
             </x-slot>
     </x-modal>
 

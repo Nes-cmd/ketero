@@ -10,6 +10,15 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
     @include('layouts.head-css')
+
+    <style>
+        .inset-0 {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0
+        }
+    </style>
 </head>
 
 @section('body')

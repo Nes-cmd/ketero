@@ -21,11 +21,12 @@ class AvailabilityController extends Controller
         $request->validate([
             'name' => 'required|unique:availabilties,name',
         ]);
+
         AvailabilityManager::cloneDefault($request->name)->getRange();
-        return redirect()->route('availability');
+        return redirect()->back();
     }
     public function deleteAvailability($availabilityId){
         Availabilty::find($availabilityId)->delete();
-        return redirect()->route('availability');
+        return redirect()->back();
     }
 }
