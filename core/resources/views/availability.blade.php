@@ -166,7 +166,7 @@
                                                         <span class="{{$status}}" style="padding-left:5px;">{{ ucfirst($status) }}</span>
                                                         <div style="display: flex; flex-direction:column;overflow-x:hidden;max-width:130px;padding-right:0">
                                                             @foreach($avToday as $timerange)
-                                                            <div style="white-space:nowrap">{{ $timerange->start_time->format('H:m') .' - '. $timerange->end_time->format('H:m')}}</div>
+                                                            <div style="white-space:nowrap">{{ $timerange['start_time'].' - '. $timerange['end_time'] }}</div>
                                                             @endforeach
                                                         </div>
                                                     </div>

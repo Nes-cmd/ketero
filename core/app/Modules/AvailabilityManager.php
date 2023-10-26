@@ -16,7 +16,7 @@ class AvailabilityManager
     }
     public static function make($availabilities)
     {
-        if(count($availabilities) == 0) return self::createDefaultAvailability();
+        if (count($availabilities) == 0) return self::createDefaultAvailability();
         self::$availabilities = $availabilities;
         return new AvailabilityManager;
     }
@@ -29,17 +29,21 @@ class AvailabilityManager
             $newRange['id'] = $availability->id;
 
             $timeranges = $availability->timerange->groupBy('date');
-
+           
             $newSlot = [];
             foreach (self::$daycodes as $code) {
                 if (!$timeranges->has($code)) $newSlot[$code] = [];
-                else $newSlot[$code] = $timeranges[$code];
+                else {
+                    $newSlot[$code] = makeArray($timeranges[$code]);
+                }
             }
             $newRange['timeranges'] = $newSlot;
             array_push($sortedRange, $newRange);
         }
+        
         return $sortedRange;
     }
+    
     public static function createDefaultAvailability()
     {
         $defaultData = [
@@ -76,7 +80,8 @@ class AvailabilityManager
         // return Availabilty::with('timerange')->where('id', $newAvailability->id)->first();
     }
 
-    public static function fillDefaultTimerange($availabilityId){
+    public static function fillDefaultTimerange($availabilityId)
+    {
         $defautlScheduletimerange = [];
         foreach (self::$daycodes as $day) {
             if ($day == 'sat' || $day == 'sun') continue;
@@ -99,4 +104,17 @@ class AvailabilityManager
         }
         Scheduletimerange::insert($defautlScheduletimerange);
     }
+}
+function makeArray($timerangeObject){
+    $main = [];
+    $newarray = [];
+    foreach($timerangeObject as $obj){
+        $newarray['id'] = $obj->id;
+        $newarray['start_time'] = $obj->start_time->format('H:m');
+        $newarray['end_time'] = $obj->end_time->format('H:m');
+        $newarray['date'] = $obj->date;
+        $newarray['availabilties_id'] = $obj->availabilties_id;
+        $main[] = $newarray;
+    }
+    return $main;
 }
