@@ -11,14 +11,16 @@
                
             </div>
             <!-- First section -->
+           
             @foreach($availableAt as $available)
             <div class="row" style="font-size: 18px">
                 <div class="col-4 d-flex my-2">
                     <label for="mon">{{ucfirst($day)}} : </label>
-                    <input class="form-control" style="width: 150px;margin-left:3px" type="time" name="mon" value="{{$available['start_time']}}" id="mon">
+                    <input wire:model="availableAt.{{$loop->index}}.start_time" class="form-control" style="width: 150px;margin-left:3px" type="time" name="mon" id="mon">
                 </div>
+                
                 <div class="col-3">
-                    <input class="form-control" type="time" name="mon" value="12:00" id="mon">
+                    <input wire:model="availableAt.{{$loop->index}}.end_time" class="form-control" type="time" id="mon">
                 </div>
             </div>
             @endforeach
@@ -33,8 +35,8 @@
                 </svg>
         </button>
         <div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button x-on:click="$dispatch('close-modal')" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button wire:click="saveChanges" type="button" class="btn btn-primary">Save changes</button>
         </div>
     </div>
 </div>

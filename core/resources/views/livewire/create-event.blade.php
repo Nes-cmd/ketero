@@ -148,7 +148,6 @@
                                                 <div style="display: flex; flex-direction:column;overflow-x:hidden;max-width:130px;padding-right:0">
                                                 
                                                     @foreach($avToday as $timerange)
-                                                   
                                                     <div style="white-space:nowrap">{{ $timerange['start_time'] .' - '. $timerange['end_time']}}</div>
                                                     @endforeach
                                                 </div>

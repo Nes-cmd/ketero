@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Availabilty;
+use App\Models\Scheduletimerange;
 use Livewire\Component;
-use stdClass;
 
 class AvailabilityEditor extends Component
 {
@@ -15,8 +16,18 @@ class AvailabilityEditor extends Component
     public function loadAvEditor($data){
         $this->availableAt = $data['timeranges'];
         $this->day = $data['day'];
-        // dd($this->availableAt);
         $this->dispatch('open-modal', ['name' => 'av-editor']);
+
+    }
+    public function saveChanges(){
+        foreach($this->availableAt as $available){
+            $availablity = Scheduletimerange::find($available['id']);
+            $availablity->start_time = $available['start_time'];
+            $availablity->end_time = $available['end_time'];
+            $availablity->save();
+           
+        }
+        $this->dispatch('close-modal');
     }
     public function render()
     {

@@ -51,9 +51,12 @@ class CreateEvent extends Component
             $this->validate([
                 'event.name' => 'required',
                 'event.location' => 'required',
-                'event.link' => 'required',
+                'event.link' => 'required|unique:event_types,link',
                 'event.color' => 'required',
             ]);
+        }
+        if($to == 'tab-3'){
+            $this->createEvent();
         }
         
         $this->activeTab = $to;
@@ -79,7 +82,7 @@ class CreateEvent extends Component
             'duration' => $this->event['duration'],
             'availabilty_id' => $this->selectedAv['id'],
         ]);
-        dd($event);
+        // dd($event);
         // dump($this->avchoosen);
         // dd($this->event);
     }

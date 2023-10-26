@@ -108,13 +108,15 @@ class AvailabilityManager
 function makeArray($timerangeObject){
     $main = [];
     $newarray = [];
+   
     foreach($timerangeObject as $obj){
         $newarray['id'] = $obj->id;
-        $newarray['start_time'] = $obj->start_time->format('H:m');
-        $newarray['end_time'] = $obj->end_time->format('H:m');
+        $newarray['start_time'] = $obj->start_time->format('H:i');
+        $newarray['end_time'] = $obj->end_time->format('H:i');
         $newarray['date'] = $obj->date;
         $newarray['availabilties_id'] = $obj->availabilties_id;
         $main[] = $newarray;
     }
+   
     return $main;
 }
