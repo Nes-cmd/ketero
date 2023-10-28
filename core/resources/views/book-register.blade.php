@@ -21,22 +21,27 @@
             <button class="back-btn" onclick="goBack()"><img class="arrow-icon" src="{{ asset('calendly-clone/icons/arrow (1).svg')}}" alt="back-arrow"></button>
             <hgroup>
                 <h4 id="scheduler">ACME Sales</h4>
-                <h2 id="event">Pricing Review</h2>
+                <h2 id="event">{{ $event->name }}</h2>
                 <div class="icon-text-div">
                     <img src="{{ asset('calendly-clone/icons/clock.svg')}}" alt="clock-icon">
-                    <h4 id="duration">15 min</h4>
+                    <h4 id="duration">{{ $event->duration }}</h4>
                 </div><br>
                 <div class="icon-text-div">
                     <img src="{{ asset('calendly-clone/icons/calendar (1).svg')}}" alt="calendar-icon">
-                    <h4 id="event-time-stamp">9:00am - 9:15am, Monday, July 13, 2020</h4>
+                    <h4 id="event-time-stamp">{{$selectedSlot}}, {{$selectedDate}}</h4>
                 </div>
             </hgroup>
         </section>
         <div class="divider"></div>
         <section id="register-section" class="body-section">
-            <form action="{{ route('confirm-booking')}}">
+            <form method="post" action="{{ route('book')}}">
+                @csrf 
+                <input type="hidden" name="eventId" value="{{$event->id}}">
+                <input type="hidden" name="selectedSlot" value="{{$selectedSlot}}">
+                <input type="hidden" name="selectedDate" value="{{$selectedDate}}">
                 <h3>Enter Details</h3>
                 <label for="name">Name</label>
+
                 <input type="text" name="" id="name" required>
                 <label for="email">Email</label>
                 <input type="email" name="" id="email" required>

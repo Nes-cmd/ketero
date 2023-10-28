@@ -4,6 +4,8 @@ namespace App\Modules;
 
 use App\Models\Availabilty;
 use App\Models\Scheduletimerange;
+use Exception;
+use Illuminate\Support\Carbon;
 
 class AvailabilityManager
 {
@@ -93,7 +95,7 @@ class AvailabilityManager
                 'availabilties_id' => $availabilityId,
             ];
             array_push($defautlScheduletimerange, $morning);
-            // afternoot
+            // afternoon
             $afternoon = [
                 'start_time' => '14:00:00',
                 'end_time'   => '17:00:00',
@@ -104,7 +106,67 @@ class AvailabilityManager
         }
         Scheduletimerange::insert($defautlScheduletimerange);
     }
+
+    public static function prepareOnedaySlot($eventType){
+
+        // dump($eventType);
+        $eventDuration = $eventType->duration;
+        $availability = $eventType->availabilty;
+        $timeRange = $availability->timerange->groupBy('date');
+
+        $sliced = [];
+        foreach (self::$daycodes as $day){
+            if( $timeRange->has($day) && count($timeRange)){
+                $sliced[$day] = makeSlice($timeRange[$day]);
+            }
+            else{
+                $sliced[$day] = [];
+            }
+        }
+        
+        return [
+            'event' => [
+                'id' => $eventType->id,
+                'name' => $eventType->name,
+                'description' => $eventType->description,
+                'location' => $eventType->location,
+                'color' => $eventType->color,
+                // 'category' => $eventType->category
+            ],
+            'sliced_availability' => $sliced,
+            'starting_date' => Carbon::now()->addDays(2)->toIso8601String(),
+            'first_day_start' => 3,
+        ];
+    }
 }
+function makeSlice($timeRange, $eventDuration = '30 min'){
+    $slice = [];
+    $eventDuration = explode(' ', $eventDuration);
+    $magnitude = $eventDuration[0];
+    $unit = $eventDuration[1];
+    
+    foreach($timeRange as $range){
+        $start = $range->start_time;
+        $end = $range->end_time;
+        if($unit == 'min'){
+            while($start->lte($end)){
+                $slice[] = $start->format('H:i a');
+                $start->addMinutes($magnitude);
+            }
+        }
+        elseif($unit == 'hour'){
+            while($start->lte($end)){
+                $slice[] = $start->format('H:i a');
+                $start->addHours($magnitude);
+            }
+        }
+        else{
+            throw new Exception('Unit except min and hour is used');
+        }
+    }
+    return $slice;
+}
+
 function makeArray($timerangeObject){
     $main = [];
     $newarray = [];

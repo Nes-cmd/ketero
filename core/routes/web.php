@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,16 @@ Route::post('create-availability', [AvailabilityController::class, 'createAvaila
 Route::post('edit-availability', [AvailabilityController::class, 'editAvailability'])->name('edit-availability');
 Route::get('delete-availability/{id}', [AvailabilityController::class, 'deleteAvailability'])->name('delete-availability');
 
+// testing 
 Route::view('test', 'test');
 Route::view('test2', 'test2');
 Route::view('test-modal', 'modal');
 
-Route::view('booking-page', 'booking-page')->name('booking-page');
-Route::view('book-register', 'book-register')->name('book-register');
-Route::view('confirm-booking', 'confirm-booking')->name('confirm-booking');
+// Booking pages
+Route::get('booking-page/{eventId}', [BookingController::class, 'bookingPage'])->name('booking-page');
+Route::get('book-register', [BookingController::class, 'bookRegister'])->name('book-register');
+Route::post('book', [BookingController::class, 'book'])->name('book');
+Route::get('confirm-booking', [BookingController::class, 'confirmBooking'])->name('confirm-booking');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 Route::view('calendar', 'calendar');

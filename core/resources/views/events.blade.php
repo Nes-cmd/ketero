@@ -27,7 +27,7 @@
 
                     <h6 class="card-text text-muted">{{ $event->description }}</h6>
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('booking-page') }}" class="btn btn-primary btn-sm">Booking page</a>
+                        <a href="{{ route('booking-page', $event->id) }}" class="btn btn-primary btn-sm">Booking page</a>
                         <a href="#" class="btn btn-success btn-sm">Turn on</a>
                     </div>
                 </div>

@@ -23,15 +23,19 @@
         <div class="container">
             <section class="description-section">
                 <hgroup>
-                    <h4 id="scheduler">ACME Sales</h4> 
-                    <h2 id="event">Pricing Review</h2>
+                    <h4 id="scheduler">{{ $preparedEvent['event']['name'] }}</h4> 
+                    <h2 id="event">{{ $preparedEvent['event']['name'] }}</h2>
                     <div class="icon-text-div">
                         <img src="{{ asset('calendly-clone/icons/clock.svg')}}" alt="clock-icon">
                         <h4 id="duration">15 min</h4>
                     </div>
                 </hgroup>
-                <p id=description>Our team will meet with you to review pricing options.</p>
+                <p id=description>{{ $preparedEvent['event']['description'] }}</p>
             </section>
+
+            <div style="display: none;" id="theEvent">{{ json_encode($preparedEvent['event']) }}</div>
+            <div style="display: none;" id="startDate">{{$preparedEvent['starting_date']}}</div>
+            <div style="display: none;" id="slicedTimes">{{ json_encode($preparedEvent['sliced_availability']) }}</div>
             <div class="divider"></div>
             <section id="calendar-section" class="body-section">
                 <h3>Select a Date & Time</h3>

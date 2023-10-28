@@ -110,11 +110,11 @@
                             <div class="mb-3 col-6">
                                 <label for="formFile" class="form-label">Duration</label>
                                 <select wire:model="event.duration" class="form-control form-select" id="formFile">
-                                    <option value="20min" selected>20 min</option>
-                                    <option value="30min">30 min</option>
-                                    <option value="45min">45 min</option>
-                                    <option value="1hour">1 hour</option>
-                                    <option value="2hour">2 hour</option>
+                                    <option value="20 min" selected>20 min</option>
+                                    <option value="30 min">30 min</option>
+                                    <option value="45 min">45 min</option>
+                                    <option value="1 hour">1 hour</option>
+                                    <option value="2 hour">2 hour</option>
                                 </select>
                                 <span>Time that you spend with one person</span>
                                 @error('event.duration')<span class="text-danger px-2">{{ $message }}</span>@enderror
