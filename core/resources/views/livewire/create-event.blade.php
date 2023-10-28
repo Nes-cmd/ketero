@@ -121,46 +121,9 @@
                             </div>
                         </div>
 
-                        <div>
-                            <h4>{{ $selectedAv['name'] == 'default'?'Default working hour':$selectedAv['name'] }}</h4>
-                            <table class="table" style="width: 100%;">
-                                <tr style="background-color:rgb(220,220,220);">
-                                    <th>Mon</th>
-                                    <th>Tue</th>
-                                    <th>Wed</th>
-                                    <th>Thr</th>
-                                    <th>Fri</th>
-                                    <th>Sat</th>
-                                    <th>Sun</th>
-                                </tr>
-                                <tbody>
-                                    <tr>
-                                        @foreach($dayOrders as $day)
-                                        @php
-                                        $status = 'unavailable';
-                                        $avToday = $selectedAv['timeranges'][$day];
-                                        if(count($avToday)){
-                                        if(count($avToday) > 1) $status = 'available';
-                                        else $status = 'partial';
-                                        }
-                                        @endphp
-                                        <td width="14%" wire:click="loadEditor('{{$day}}')" style="position:relative;background-color: rgb(240,240, 240);" data-bs-toggle="modal" data-bs-target="#{{$selectedAv['name'] == 'default'?'':'showModal'}}">
-                                            <div style="padding-left:4px;">
-                                                <span class="{{$status}}" style="padding-left:5px;color:white">{{ ucfirst($status) }}</span>
-                                                <div style="display: flex; flex-direction:column;overflow-x:hidden;max-width:130px;padding-right:0">
-                                                
-                                                    @foreach($avToday as $timerange)
-                                                    <div style="white-space:nowrap">{{ $timerange['start_time'] .' - '. $timerange['end_time']}}</div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </td>
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                            </table>
 
-                        </div>
+                        <livewire-single-availability :key="$selectedAv['id']" :availability="$selectedAv" />
+                        
                     </div>
                     <div class="d-flex align-items-start gap-3 mt-4">
                         <button wire:click="next('tab-1')" type="button" class="btn btn-light btn-label previestab" data-previous="steparrow-gen-info-tab"><i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to General</button>
@@ -189,7 +152,7 @@
     </div>
     <!-- end card body -->
 
-    <x-modal title="Create new availability" name="new-availability">
+    <x-modal title="Create new availability" width="600px" name="new-availability">
         <x-slot:body>
             <livewire-create-availability />
             </x-slot>

@@ -11,10 +11,10 @@ class AvailabilityController extends Controller
     
     public function availability() {
         $availabilities = Availabilty::with('timerange')->where('user_id', 1)->get();
-
+        
         $availabilities = AvailabilityManager::make($availabilities)->getRange();
         $dayOrders = AvailabilityManager::getDaycodes();
-        // dd($availabilities);
+
         return view('availability', compact('availabilities', 'dayOrders'));
     }
     public function createAvailability(Request $request){

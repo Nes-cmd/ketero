@@ -45,6 +45,7 @@ class AvailabilityEditor extends Component
     }
     public function saveChanges()
     {
+        
         foreach ($this->availableAt as $available) {
             if (array_key_exists('id', $available)) {
                 $availablity = Scheduletimerange::find($available['id']);
@@ -57,6 +58,7 @@ class AvailabilityEditor extends Component
         }
         foreach ($this->removedIds as $id) Scheduletimerange::find($id)->delete();
         $this->dispatch('close-modal');
+        $this->dispatch('updateAvailability.'.$this->availablityId);
     }
     public function render()
     {
