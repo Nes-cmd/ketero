@@ -13,7 +13,7 @@ class CreateEvent extends Component
     public $availabilities;
     public $dayOrders;
 
-    public $event = ['maxinvities' => 1];
+    public $event = ['maxinvities' => 1, 'color' => '#090854', 'duration' => '30min'];
     public $group = false;
     public $avchoosen;
 
@@ -31,7 +31,8 @@ class CreateEvent extends Component
         
     }
     public function loadEditor($day){
-        $this->dispatch('loadAvEditor', ['timeranges' => $this->selectedAv['timeranges'][$day], 'day' => $day]);
+
+        $this->dispatch('loadAvEditor', ['timeranges' => $this->selectedAv['timeranges'][$day], 'day' => $day, 'avId' => $this->avchoosen]);
     }
     public function updatedAvchoosen()
     {
@@ -53,6 +54,7 @@ class CreateEvent extends Component
                 'event.location' => 'required',
                 'event.link' => 'required|unique:event_types,link',
                 'event.color' => 'required',
+                'event.description' => 'required'
             ]);
         }
         if($to == 'tab-3'){
@@ -72,7 +74,7 @@ class CreateEvent extends Component
         ]);
         $event = EventType::create([
             'name' => $this->event['name'],
-            'description' => 'Description will goes here',
+            'description' => $this->event['description'],
             'link' => $this->event['link'],
             'location' => $this->event['location'],
             'color' => $this->event['color'],
@@ -82,7 +84,7 @@ class CreateEvent extends Component
             'duration' => $this->event['duration'],
             'availabilty_id' => $this->selectedAv['id'],
         ]);
-        // dd($event);
+        dd($event);
         // dump($this->avchoosen);
         // dd($this->event);
     }

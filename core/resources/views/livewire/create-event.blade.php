@@ -41,9 +41,11 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="">
-                                <label for="">Description/Instruction about the Event</label>
-                                <div id="richeditor" class="ckeditor-classic"></div>
+                            <div class="col-lg-12">
+                                <label for="form-label">Description/Instruction about the Event</label><br>
+                                <textarea wire:model.lazy="event.description" class="w-100 form-control" rows="6">
+
+                                </textarea>
                                 @error('event.description')<span class="text-danger px-2">{{ $message }}</span>@enderror
                             </div>
                             <!-- end card -->
@@ -144,7 +146,7 @@
                                         @endphp
                                         <td width="14%" wire:click="loadEditor('{{$day}}')" style="position:relative;background-color: rgb(240,240, 240);" data-bs-toggle="modal" data-bs-target="#{{$selectedAv['name'] == 'default'?'':'showModal'}}">
                                             <div style="padding-left:4px;">
-                                                <span class="{{$status}}" style="padding-left:5px;">{{ ucfirst($status) }}</span>
+                                                <span class="{{$status}}" style="padding-left:5px;color:white">{{ ucfirst($status) }}</span>
                                                 <div style="display: flex; flex-direction:column;overflow-x:hidden;max-width:130px;padding-right:0">
                                                 
                                                     @foreach($avToday as $timerange)
@@ -187,13 +189,13 @@
     </div>
     <!-- end card body -->
 
-    <x-modal title="Create new availability" name="new-availability" height="300px">
+    <x-modal title="Create new availability" name="new-availability">
         <x-slot:body>
             <livewire-create-availability />
             </x-slot>
     </x-modal>
 
-    <x-modal title="Availability for" name="av-editor" height="450px">
+    <x-modal title="Availability for" name="av-editor" width="40%">
         <x-slot:body>
             <livewire-availability-editor />
             </x-slot>
