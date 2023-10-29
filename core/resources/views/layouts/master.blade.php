@@ -52,11 +52,17 @@
             display: flex !important;
             justify-content: space-between !important;
         }
+
         .inset-0 {
             top: 0;
             bottom: 0;
             right: 0;
             left: 0
+        }
+
+        .custom-top-border {
+            border-top-width: 4px;
+            border-top-style: solid;
         }
     </style>
 </head>

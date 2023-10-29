@@ -1,9 +1,9 @@
-<div class="card">
+<div class="card custom-top-border" style="border-top-color:{{ $event['color'] }}">
     <div class="card-header">
         <h4 class="card-title mb-0">Create event</h4>
     </div>
     <!-- end card header -->
-    <div class="card-body form-steps">
+    <div class="card-body form-steps" >
         <form action="#">
 
             <div class="step-arrow-nav mb-4">
@@ -62,7 +62,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="colorPicker" class="form-label">Color</label>
-                                    <input wire:model="event.color" type="color" class="form-control form-control-color w-100" id="colorPicker" value="#364574">
+                                    <input wire:model.live="event.color" type="color" class="form-control form-control-color w-100" id="colorPicker" value="#364574">
                                     @error('event.color')<span class="text-danger px-2">{{ $message }}</span>@enderror
                                 </div>
                             </div>

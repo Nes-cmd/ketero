@@ -5,12 +5,7 @@
 @slot('li_1') Pages @endslot
 @slot('title') Events @endslot
 @endcomponent
-<style>
-    .custom-border {
-      border-top-width: 4px;
-      border-top-style: solid;
-    }
-  </style>
+
 <div class="row">
     <div class="col-12">
         <div class="justify-content-between d-flex align-items-center mt-3 mb-4">
@@ -19,7 +14,7 @@
         <div class="row row-cols-xxl-5 row-cols-lg-3 row-cols-1">
             @foreach($events as $event)
             <div class="col">
-                <div class="card card-body custom-border" style="border-top-color: {{$event->color}};">
+                <div class="card card-body custom-top-border" style="border-top-color: {{$event->color}};">
                     <div class="d-flex mb-4 align-items-center">
                         <div class="flex-shrink-0">
                             <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="" class="avatar-sm rounded-circle" />

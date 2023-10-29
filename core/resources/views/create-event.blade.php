@@ -18,12 +18,4 @@
 </div><!-- end row -->
 
 </div>
-
-<!-- new av modal end-->
-
-<!-- availability modal -->
-
-@endsection
-@section('script')
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 @endsection
