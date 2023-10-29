@@ -1,5 +1,5 @@
 /*
-Template Name: Velzon - Admin & Dashboard Template
+Template Name: Ketero - Admin & Dashboard Template
 Author: Themesbrand
 Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com

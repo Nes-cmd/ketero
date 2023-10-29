@@ -1,5 +1,5 @@
 /*
-Template Name: Velzon - Admin & Dashboard Template
+Template Name: Ketero - Admin & Dashboard Template
 Author: Themesbrand
 Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
@@ -42,7 +42,7 @@ if (document.querySelector('#logo-tour'))
 if (document.querySelector('#register-tour'))
     tour.addStep({
         title: 'Register your account',
-        text: 'Get your Free Velzon account now.',
+        text: 'Get your Free Ketero account now.',
         attachTo: {
             element: '#register-tour',
             on: 'bottom'
@@ -64,7 +64,7 @@ if (document.querySelector('#register-tour'))
 if (document.querySelector('#login-tour'))
     tour.addStep({
         title: 'Login your account',
-        text: 'Sign in to continue to Velzon.',
+        text: 'Sign in to continue to Ketero.',
         attachTo: {
             element: '#login-tour',
             on: 'bottom'
@@ -86,7 +86,7 @@ if (document.querySelector('#login-tour'))
 if (document.querySelector('#getproduct-tour'))
     tour.addStep({
         title: 'Get yout Product',
-        text: 'Sign in to continue to Velzon.',
+        text: 'Sign in to continue to Ketero.',
         attachTo: {
             element: '#getproduct-tour',
             on: 'bottom'
@@ -108,7 +108,7 @@ if (document.querySelector('#getproduct-tour'))
 if (document.querySelector('#thankyou-tour'))
     tour.addStep({
         title: 'Thank you !',
-        text: 'Sign in to continue to Velzon.',
+        text: 'Sign in to continue to Ketero.',
         attachTo: {
             element: '#thankyou-tour',
             on: 'bottom'

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title')| Velzon - Admin & Dashboard Template</title>
+    <title>@yield('title')| Ketero - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -52,8 +52,6 @@
             display: flex !important;
             justify-content: space-between !important;
         }
-    </style>
-    <style>
         .inset-0 {
             top: 0;
             bottom: 0;
@@ -87,7 +85,6 @@
 </div>
 <!-- END layout-wrapper -->
 
-@include('layouts.customizer')
 
 <!-- JAVASCRIPT -->
 @include('layouts.vendor-scripts')
