@@ -36,15 +36,15 @@
         <section id="register-section" class="body-section">
             <form method="post" action="{{ route('book')}}">
                 @csrf 
-                <input type="hidden" name="eventId" value="{{$event->id}}">
+                <input type="hidden" name="eventtype_id" value="{{$event->id}}">
                 <input type="hidden" name="selectedSlot" value="{{$selectedSlot}}">
                 <input type="hidden" name="selectedDate" value="{{$selectedDate}}">
                 <h3>Enter Details</h3>
                 <label for="name">Name</label>
 
-                <input type="text" name="" id="name" required>
+                <input type="text" name="name" id="name" required>
                 <label for="email">Email</label>
-                <input type="email" name="" id="email" required>
+                <input type="email" name="email" id="email" required>
                 <button id="submit-btn" type="submit">Schedule Event</button>
             </form>
         </section>

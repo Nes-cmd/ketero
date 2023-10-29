@@ -50,7 +50,7 @@ class CreateEvent extends Component
     public function next($to){
         if($to == 'tab-2'){
             $this->validate([
-                'event.name' => 'required',
+                'event.name' => 'required|unique:event_types,name',
                 'event.location' => 'required',
                 'event.link' => 'required|unique:event_types,link',
                 'event.color' => 'required',

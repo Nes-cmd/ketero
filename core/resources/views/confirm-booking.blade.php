@@ -22,20 +22,18 @@
             </section>
             <section class="description-section">
                 <hgroup>
-                    <h3 id="event">Pricing Review</h3>
+                    <h3 id="event">{{ $event->name }}</h3>
                     <div class="icon-text-div">
                         <img src="{{ asset('calendly-clone/icons/clock.svg')}}" alt="clock-icon">
-                        <h4 id="duration">15 min</h4>
+                        <h4 id="duration">{{ $event->duration }}</h4>
                     </div><br>
                     <div class="icon-text-div">
                         <img src="{{ asset('calendly-clone/icons/calendar (1).svg')}}" alt="calendar-icon">
-                        <h4 id="event-time-stamp">9:00am - 9:15am, Monday, July 13, 2020</h4>
+                        <h4 id="event-time-stamp">{{$selectedSlot}}, {{$selectedDate}}</h4>
                     </div>
                 </hgroup>
             </section>
         </div>
-        
-        <script src="{{ asset('calendly-clone/script/confirm.js')}}"></script>
 
     </body>
 </html>
