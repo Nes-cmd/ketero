@@ -1,6 +1,6 @@
 .container {
   display: block;
-  height: 85vh;
+  /* height: 85vh; */
   text-align: center;
   width: 645px;
   margin: 50px auto;
